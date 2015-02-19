@@ -8,7 +8,7 @@
 -- Portability  : portable
 --
 -------------------------------------------------------------------------------
-module Sound.Csound.Instantiation where
+module Sound.Csound.MessagesAndText where
 
 import Foreign
 import Foreign.C.Types

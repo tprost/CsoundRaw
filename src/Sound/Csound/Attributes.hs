@@ -8,9 +8,15 @@
 -- Portability  : portable
 --
 -------------------------------------------------------------------------------
-module Sound.Csound.Attributes where
+module Sound.Csound.Attributes (
+    csoundGetSizeOfMYFLT
+) where
 
-import Foreign
+import Control.Monad.IO.Class
+import Foreign.C
 import Foreign.C.Types
 
+foreign import ccall "csound.h csoundGetSizeOfMYFLT" csoundGetSizeOfMYFLT' :: IO CInt
 
+csoundGetSizeOfMYFLT :: MonadIO m => m CInt
+csoundGetSizeOfMYFLT = liftIO csoundGetSizeOfMYFLT'

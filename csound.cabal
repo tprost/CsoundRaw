@@ -12,16 +12,39 @@ maintainer:             oldmanmike.dev@gmail.com
 -- copyright:           
 category:               Sound
 build-type:             Simple
--- extra-source-files:  
+extra-source-files:     README.md
 cabal-version:          >=1.10
+source-repository head
+    type:     git
+    location: https://github.com/oldmanmike/csound
 
 library
-  exposed-modules:      Sound.Csound.Instantiation 
+  hs-source-dirs:       src
   extra-libraries: csound64
   ghc-options: -Wall -O2
   -- other-modules:       
   -- other-extensions:    
   build-depends:        base >=4.7 && <4.8,
                         transformers
-  hs-source-dirs:       src
+
   default-language:     Haskell2010
+
+  exposed-modules:
+    Sound.Csound
+    Sound.Csound.Attributes
+    Sound.Csound.ChannelsControlEvents
+    Sound.Csound.Debugger
+    Sound.Csound.FunctionTableDisplay
+    Sound.Csound.GeneralIO
+    Sound.Csound.Instantiation
+    Sound.Csound.MessagesAndText
+    Sound.Csound.Miscellaneous
+    Sound.Csound.Opcodes
+    Sound.Csound.Performance
+    Sound.Csound.RealtimeAudioIO
+    Sound.Csound.RealtimeMidiIO
+    Sound.Csound.ScoreHandling
+    Sound.Csound.Tables
+    Sound.Csound.Threading
+    Sound.Csound.Types
+
