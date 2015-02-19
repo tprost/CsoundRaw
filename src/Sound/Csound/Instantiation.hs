@@ -1,3 +1,4 @@
+{-# LANGUAGE ForeignFunctionInterface #-}
 -------------------------------------------------------------------------------
 -- |
 -- Copyright    : (c) 2015 Michael Carpenter
@@ -7,4 +8,13 @@
 -- Portability  : portable
 --
 -------------------------------------------------------------------------------
-module Sound.Csound where
+module Sound.Csound.Instantiation where
+
+import Foreign
+import Foreign.C.Types
+
+--csoundCreate
+--csoundDestroy
+--csoundGetAPIVersion
+--csoundGetVersion
+--csoundInitialize

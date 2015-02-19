@@ -1,3 +1,4 @@
+{-# LANGUAGE ForeignFunctionInterface #-}
 -------------------------------------------------------------------------------
 -- |
 -- Copyright    : (c) 2015 Michael Carpenter
@@ -7,4 +8,9 @@
 -- Portability  : portable
 --
 -------------------------------------------------------------------------------
-module Sound.Csound where
+module Sound.Csound.GeneralIO where
+
+import Foreign
+import Foreign.C.Types
+
+
