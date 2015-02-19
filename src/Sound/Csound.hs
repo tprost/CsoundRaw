@@ -7,4 +7,8 @@
 -- Portability  : portable
 --
 -------------------------------------------------------------------------------
-module Sound.Csound where
+module Sound.Csound (
+    module Sound.Csound.Instantiation
+) where
+
+import Sound.Csound.Instantiation

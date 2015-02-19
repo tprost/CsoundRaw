@@ -8,13 +8,20 @@
 -- Portability  : portable
 --
 -------------------------------------------------------------------------------
-module Sound.Csound.Instantiation where
+module Sound.Csound.Instantiation (
+    csoundGetAPIVersion,
+    csoundGetVersion
+) where
 
-import Foreign
+import Control.Monad.IO.Class
+import Foreign.C
 import Foreign.C.Types
 
---csoundCreate
---csoundDestroy
---csoundGetAPIVersion
---csoundGetVersion
---csoundInitialize
+foreign import ccall "csound.h csoundGetAPIVersion" csoundGetAPIVersion' :: IO CInt
+foreign import ccall "csound.h csoundGetVersion" csoundGetVersion' :: IO CInt
+
+csoundGetAPIVersion :: MonadIO m => m CInt
+csoundGetAPIVersion = liftIO csoundGetAPIVersion'
+
+csoundGetVersion :: MonadIO m => m CInt
+csoundGetVersion = liftIO csoundGetVersion'
