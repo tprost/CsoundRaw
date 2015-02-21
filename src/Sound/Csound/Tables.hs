@@ -8,9 +8,15 @@
 -- Portability  : portable
 --
 -------------------------------------------------------------------------------
-module Sound.Csound.Tables where
+module Sound.Csound.Tables (
+    csoundTableLength
+) where
 
+import Control.Monad.IO.Class
 import Foreign
 import Foreign.C.Types
 
+foreign import ccall "csound.h csoundTableLength" csoundTableLength' :: Ptr () -> CInt -> IO CInt
 
+csoundTableLength :: MonadIO m => Ptr () -> CInt -> m CInt
+csoundTableLength csoundptr table = liftIO (csoundTableLength' csoundptr table)

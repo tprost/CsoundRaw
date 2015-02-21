@@ -17,7 +17,6 @@ module Sound.Csound.Instantiation (
 ) where
 
 import Control.Monad.IO.Class
-import Foreign.C
 import Foreign.Ptr
 import Foreign.C.Types
 

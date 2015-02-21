@@ -10,7 +10,15 @@
 -------------------------------------------------------------------------------
 module Sound.Csound.Threading where
 
+import Control.Monad.IO.Class
 import Foreign
 import Foreign.C.Types
 
+foreign import ccall "csound.h csoundGetCurrentThreadId" csoundGetCurrentThreadId' :: IO (Ptr ())
+foreign import ccall "csound.h csoundCreateThreadLock" csoundCreateThreadLock' :: IO (Ptr ())
 
+csoundGetCurrentThreadId :: MonadIO m => m (Ptr ())
+csoundGetCurrentThreadId = liftIO csoundGetCurrentThreadId'
+
+csoundCreateThreadLock :: MonadIO m => m (Ptr ())
+csoundCreateThreadLock = liftIO csoundCreateThreadLock'
