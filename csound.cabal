@@ -10,7 +10,7 @@ license-file:           LICENSE
 author:                 oldmanmike
 maintainer:             oldmanmike.dev@gmail.com
 -- copyright:           
-category:               Sound
+category:               Sound, Music
 build-type:             Simple
 extra-source-files:     README.md
 cabal-version:          >=1.10
@@ -47,4 +47,5 @@ library
     Sound.Csound.Tables
     Sound.Csound.Threading
     Sound.Csound.Types
+
 
