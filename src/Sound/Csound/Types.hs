@@ -7,7 +7,12 @@
 -- Portability  : portable
 --
 -------------------------------------------------------------------------------
-module Sound.Csound.Types where
+module Sound.Csound.Types (
+    MYFLT
+) where
 
-import Foreign.C.Types
+import Foreign
 import Foreign.Ptr
+import Foreign.C.Types
+
+type MYFLT = CDouble
