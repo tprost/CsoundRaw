@@ -10,7 +10,7 @@
 module Sound.Csound (
     module Sound.Csound.Attributes,
     module Sound.Csound.ChannelsControlEvents,
-    module Sound.Csound.Debugger,
+    --module Sound.Csound.Debugger,
     module Sound.Csound.FunctionTableDisplay,
     module Sound.Csound.GeneralIO,
     module Sound.Csound.Instantiation,
@@ -28,7 +28,7 @@ module Sound.Csound (
 
 import Sound.Csound.Attributes
 import Sound.Csound.ChannelsControlEvents
-import Sound.Csound.Debugger
+--import Sound.Csound.Debugger
 import Sound.Csound.FunctionTableDisplay
 import Sound.Csound.GeneralIO
 import Sound.Csound.Instantiation

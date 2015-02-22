@@ -21,11 +21,11 @@ import Foreign
 import Foreign.Ptr
 import Foreign.C.Types
 
-foreign import ccall "csound.h csoundDebuggerInit" csoundDebuggerInit' :: Ptr () -> IO ()
-foreign import ccall "csound.h csoundDebuggerClean" csoundDebuggerClean' :: Ptr () -> IO ()
-foreign import ccall "csound.h csoundClearBreakpoints" csoundClearBreakpoints' :: Ptr () -> IO ()
-foreign import ccall "csound.h csoundDebuggerContinue" csoundDebuggerContinue' :: Ptr () -> IO ()
-foreign import ccall "csound.h csoundDebugStop" csoundDebugStop' :: Ptr () -> IO ()
+foreign import ccall "csdebug.h csoundDebuggerInit" csoundDebuggerInit' :: Ptr () -> IO ()
+foreign import ccall "csdebug.h csoundDebuggerClean" csoundDebuggerClean' :: Ptr () -> IO ()
+foreign import ccall "csdebug.h csoundClearBreakpoints" csoundClearBreakpoints' :: Ptr () -> IO ()
+foreign import ccall "csdebug.h csoundDebuggerContinue" csoundDebuggerContinue' :: Ptr () -> IO ()
+foreign import ccall "csdebug.h csoundDebugStop" csoundDebugStop' :: Ptr () -> IO ()
 
 csoundDebuggerInit :: MonadIO m => Ptr () -> m ()
 csoundDebuggerInit csoundptr = liftIO (csoundDebuggerInit' csoundptr)

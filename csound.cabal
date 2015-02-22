@@ -33,7 +33,7 @@ library
     Sound.Csound
     Sound.Csound.Attributes
     Sound.Csound.ChannelsControlEvents
-    Sound.Csound.Debugger
+    --Sound.Csound.Debugger
     Sound.Csound.FunctionTableDisplay
     Sound.Csound.GeneralIO
     Sound.Csound.Instantiation
