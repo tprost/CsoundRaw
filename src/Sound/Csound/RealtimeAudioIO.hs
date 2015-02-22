@@ -8,9 +8,111 @@
 -- Portability  : portable
 --
 -------------------------------------------------------------------------------
-module Sound.Csound.RealtimeAudioIO where
+module Sound.Csound.RealtimeAudioIO (
+    --csoundSetRTAudioModule,
+    --csoundGetModule,
+    --csoundGetInputBufferSize,
+    --csoundGetOutputBufferSize,
+    --csoundGetInputBuffer,
+    --csoundGetOutputBuffer,
+    --csoundGetSpin,
+    --csoundAddSpinSample,
+    --csoundGetSpout,
+    --csoundGetSpoutSample,
+    --csoundGetRtRecordUserData,
+    --csoundGetRtPlayUserData,
+    --csoundSetHostImplementedAudioIO,
+    --csoundGetAudioDevList,
+    --csoundSetPlayOpenCallback,
+    --csoundSetRtPlayCallback,
+    --csoundSetRecOpenCallback,
+    --csoundSetRtRecordCallback,
+    --csoundSetRtCloseCallback,
+    --csoundSetAudioDeviceListCallback
+) where
 
+import Control.Monad.IO.Class
 import Foreign
+import Foreign.Ptr
 import Foreign.C.Types
 
+--foreign import ccall "csound.h csoundSetRTAudioModule" csoundSetRTAudioModule'
+--foreign import ccall "csound.h csoundGetModule" csoundGetModule'
+--foreign import ccall "csound.h csoundGetInputBufferSize" csoundGetInputBufferSize'
+--foreign import ccall "csound.h csoundGetOutputBufferSize" csoundGetOutputBufferSize'
+--foreign import ccall "csound.h csoundGetInputBuffer" csoundGetInputBuffer'
+--foreign import ccall "csound.h csoundGetOutputBuffer" csoundGetOutput'
+--foreign import ccall "csound.h csoundGetSpin" csoundGetSpin'
+--foreign import ccall "csound.h csoundAddSpinSample" csoundAddSpinSample'
+--foreign import ccall "csound.h csoundGetSpout" csoundGetSpout'
+--foreign import ccall "csound.h csoundGetSpoutSample" csoundGetSpoutSample'
+--foreign import ccall "csound.h csoundGetRtRecordUserData" csoundGetRtRecordUserData'
+--foreign import ccall "csound.h csoundGetRtPlayUserData" csoundGetRtPlayUserData'
+--foreign import ccall "csound.h csoundSetHostImplementedAudioIO" csoundSetHostImplementedAudioIO'
+--foreign import ccall "csound.h csoundGetAudioDevList" csoundGetAudioDevList'
+--foreign import ccall "csound.h csoundSetPlayopenCallback" csoundSetPlayopenCallback'
+--foreign import ccall "csound.h csoundSetRtplayCallback" csoundSetRtplayCallback'
+--foreign import ccall "csound.h csoundSetRecopenCallback" csoundSetrecopenCallback'
+--foreign import ccall "csound.h csoundSetRtrecordCallback" csoundSetRtrecordCallback'
+--foreign import ccall "csound.h csoundSetRtcloseCallback" csoundSetRtcloseCallback'
+--foreign import ccall "csound.h csoundSetAudioDeviceListCallback" csoundSetAudioDeviceListCallback'
 
+--csoundSetRTAudioModule
+--csoundSetRTAudioModule
+
+--csoundGetModule
+--csoundGetModule
+
+--csoundGetInputBufferSize
+--csoundGetInputBufferSize
+
+--csoundGetOutputBufferSize
+--csoundGetOutputBufferSize
+
+--csoundGetInputBuffer
+--csoundGetInputBuffer
+
+--csoundGetOutputBuffer
+--csoundGetOutputBuffer
+
+--csoundGetSpin
+--csoundGetSpin
+
+--csoundAddSpinSample
+--csoundAddSpinSample
+
+--csoundGetSpout
+--csoundGetSpout
+
+--csoundGetSpoutSample
+--csoundGetSpoutSample
+
+--csoundGetRtRecordUserData
+--csoundGetRtRecordUserData
+
+--csoundGetRtPlayUserData
+--csoundGetRtPlayUserData
+
+--csoundSetHostImplementedAudioIO
+--csoundSetHostImplementedAudioIO
+
+--csoundGetAudioDevList
+--csoundGetAudioDevList
+
+--csoundSetPlayOpenCallback
+--csoundSetPlayOpenCallback
+
+--csoundSetRtPlayCallback
+--csoundSetRtPlayCallback
+
+--csoundSetRecOpenCallback
+--csoundSetRecOpenCallback
+
+--csoundSetRtRecordCallback
+--csoundSetRtRecordCallback
+
+--csoundSetRtCloseCallback
+--csoundSetRtCloseCallback
+
+--csoundSetAudioDeviceListCallback
+--csoundSetAudioDeviceListCallback

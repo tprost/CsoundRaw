@@ -9,6 +9,16 @@
 --
 -------------------------------------------------------------------------------
 module Sound.Csound.Performance (
+    --csoundParseOrc,
+    --csoundCompileTree,
+    --csoundDeleteTree,
+    --csoundCompileOrc,
+    --csoundEvalCode,
+    --csoundInitializeCscore,
+    --csoundCompileArgs,
+    --csoundStart,
+    --csoundCompile,
+    --csoundCompileCsd,
     csoundPerform,
     csoundPerformKsmps,
     csoundPerformBuffer,
@@ -21,12 +31,52 @@ import Control.Monad.IO.Class
 import Foreign.Ptr
 import Foreign.C.Types
 
+--foreign import ccall "csound.h csoundParseOrc" csoundParseOrc'
+--foreign import ccall "csound.h csoundCompileTree" csoundCompileTree'
+--foreign import ccall "csound.h csoundDeleteTree" csoundDeleteTree'
+--foreign import ccall "csound.h csoundCompileOrc" csoundCompileOrc'
+--foreign import ccall "csound.h csoundEvalCode" csoundEvalCode'
+--foreign import ccall "csound.h csoundInitializeCscore" csoundInitializeCscore'
+--foreign import ccall "csound.h csoundCompileArgs" csoundCompileArgs'
+--foreign import ccall "csound.h csoundStart" csoundStart'
+--foreign import ccall "csound.h csoundCompile" csoundCompile'
+--foreign import ccall "csound.h csoundCompileCsd" csoundCompileCsd'
 foreign import ccall "csound.h csoundPerform" csoundPerform' :: Ptr () -> IO CInt
 foreign import ccall "csound.h csoundPerformKsmps" csoundPerformKsmps' :: Ptr () -> IO CInt
 foreign import ccall "csound.h csoundPerformBuffer" csoundPerformBuffer' :: Ptr () -> IO CInt
 foreign import ccall "csound.h csoundStop" csoundStop' :: Ptr () -> IO ()
 foreign import ccall "csound.h csoundCleanup" csoundCleanup' :: Ptr () -> IO CInt
 foreign import ccall "csound.h csoundReset" csoundReset' :: Ptr () -> IO CInt
+
+--csoundParseOrc
+--csoundParseOrc
+
+--csoundCompileTree
+--csoundCompileTree
+
+--csoundDeleteTree
+--csoundDeleteTree
+
+--csoundCompileOrc
+--csoundCompileOrc
+
+--csoundEvalCode
+--csoundEvalCode
+
+--csoundInitializeCscore
+--csoundInitializeCscore
+
+--csoundCompileArgs
+--csoundCompileArgs
+
+--csoundStart
+--csoundStart
+
+--csoundCompile
+--csoundCompile
+
+--csoundCompileCsd
+--csoundCompileCsd
 
 csoundPerform :: MonadIO m => Ptr () -> m CInt
 csoundPerform csoundptr = liftIO (csoundPerform' csoundptr)
