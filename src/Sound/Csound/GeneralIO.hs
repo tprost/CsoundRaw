@@ -20,7 +20,6 @@ module Sound.Csound.GeneralIO (
 ) where
 
 import Control.Monad.IO.Class
-import Foreign
 import Foreign.Ptr
 import Foreign.C.Types
 

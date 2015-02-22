@@ -11,8 +11,8 @@
 module Sound.Csound.RealtimeAudioIO (
     --csoundSetRTAudioModule,
     --csoundGetModule,
-    --csoundGetInputBufferSize,
-    --csoundGetOutputBufferSize,
+    csoundGetInputBufferSize,
+    csoundGetOutputBufferSize
     --csoundGetInputBuffer,
     --csoundGetOutputBuffer,
     --csoundGetSpin,
@@ -32,14 +32,13 @@ module Sound.Csound.RealtimeAudioIO (
 ) where
 
 import Control.Monad.IO.Class
-import Foreign
 import Foreign.Ptr
 import Foreign.C.Types
 
 --foreign import ccall "csound.h csoundSetRTAudioModule" csoundSetRTAudioModule'
 --foreign import ccall "csound.h csoundGetModule" csoundGetModule'
---foreign import ccall "csound.h csoundGetInputBufferSize" csoundGetInputBufferSize'
---foreign import ccall "csound.h csoundGetOutputBufferSize" csoundGetOutputBufferSize'
+foreign import ccall "csound.h csoundGetInputBufferSize" csoundGetInputBufferSize' :: Ptr () -> IO CLong
+foreign import ccall "csound.h csoundGetOutputBufferSize" csoundGetOutputBufferSize' :: Ptr () -> IO CLong
 --foreign import ccall "csound.h csoundGetInputBuffer" csoundGetInputBuffer'
 --foreign import ccall "csound.h csoundGetOutputBuffer" csoundGetOutput'
 --foreign import ccall "csound.h csoundGetSpin" csoundGetSpin'
@@ -63,11 +62,11 @@ import Foreign.C.Types
 --csoundGetModule
 --csoundGetModule
 
---csoundGetInputBufferSize
---csoundGetInputBufferSize
+csoundGetInputBufferSize :: MonadIO m => Ptr () -> m CLong
+csoundGetInputBufferSize csnd = liftIO (csoundGetInputBufferSize' csnd)
 
---csoundGetOutputBufferSize
---csoundGetOutputBufferSize
+csoundGetOutputBufferSize :: MonadIO m => Ptr () -> m CLong
+csoundGetOutputBufferSize csnd = liftIO (csoundGetOutputBufferSize' csnd)
 
 --csoundGetInputBuffer
 --csoundGetInputBuffer

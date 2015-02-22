@@ -18,7 +18,6 @@ module Sound.Csound.Tables (
 ) where
 
 import Control.Monad.IO.Class
-import Foreign
 import Foreign.Ptr
 import Foreign.C.Types
 

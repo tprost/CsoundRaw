@@ -31,13 +31,12 @@ module Sound.Csound.ChannelsControlEvents (
     --csoundInputMessage,
     --csoundKillInstance,
     --csoundRegisterSenseEventCallback,
-    --csoundKeyPress,
+    csoundKeyPress
     --csoundRegisterKeyboardCallback,
     --csoundRemoveKeyboardCallback
 ) where
 
 import Control.Monad.IO.Class
-import Foreign
 import Foreign.Ptr
 import Foreign.C.Types
 
@@ -63,7 +62,7 @@ import Foreign.C.Types
 --foreign import ccall "csound.h csoundInputMessage" csoundInputMessage'
 --foreign import ccall "csound.h csoundKillInstance" csoundKillInstance'
 --foreign import ccall "csound.h csoundRegisterSenseEventCallback" csoundRegisterSenseEventCallback'
---foreign import ccall "csound.h csoundKeyPress" csoundKeyPress'
+foreign import ccall "csound.h csoundKeyPress" csoundKeyPress' :: Ptr () -> CChar -> IO ()
 --foreign import ccall "csound.h csoundRegisterKeyboardCallback" csoundRegisterKeyboardCallback'
 --foreign import ccall "csound.h csoundRemoveKeyboardCallback" csoundRemoveKeyboardCallback'
 
@@ -133,8 +132,8 @@ import Foreign.C.Types
 --csoundRegisterSenseEventCallback
 --csoundRegisterSenseEventCallback
 
---csoundKeyPress
---csoundKeyPress
+csoundKeyPress :: MonadIO m => Ptr () -> CChar -> m ()
+csoundKeyPress csnd c = liftIO (csoundKeyPress' csnd c)
    
 --csoundRegisterKeyboardCallback
 --csoundRegisterKeyboardCallback

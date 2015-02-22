@@ -22,7 +22,6 @@ module Sound.Csound.ScoreHandling (
 ) where
 
 import Control.Monad.IO.Class
-import Foreign
 import Foreign.C.Types
 import Foreign.Ptr
 

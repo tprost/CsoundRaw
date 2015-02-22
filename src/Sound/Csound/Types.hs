@@ -11,8 +11,6 @@ module Sound.Csound.Types (
     MYFLT
 ) where
 
-import Foreign
-import Foreign.Ptr
 import Foreign.C.Types
 
 type MYFLT = CDouble

@@ -30,9 +30,7 @@ module Sound.Csound.Threading (
 ) where
 
 import Control.Monad.IO.Class
-import Foreign
 import Foreign.Ptr
-import Foreign.C.Types
 
 --foreign import ccall "csound.h csoundSetYieldCallback" csoundSetYieldCallback'
 --foreign import ccall "csound.h csoundCreateThread" csoundCreateThread'

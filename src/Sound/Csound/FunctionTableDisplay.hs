@@ -9,7 +9,7 @@
 --
 -------------------------------------------------------------------------------
 module Sound.Csound.FunctionTableDisplay (
-    --csoundSetIsGraphable,
+    csoundSetIsGraphable
     --csoundSetMakeGraphCallback,
     --csoundSetDrawGraphCallback,
     --csoundSetKillGraphCallback,
@@ -17,18 +17,17 @@ module Sound.Csound.FunctionTableDisplay (
 ) where
 
 import Control.Monad.IO.Class
-import Foreign
 import Foreign.Ptr
 import Foreign.C.Types
 
---foreign import ccall "csound.h csoundSetIsGraphable" csoundSetIsGraphable'
+foreign import ccall "csound.h csoundSetIsGraphable" csoundSetIsGraphable' :: Ptr () -> CInt -> IO CInt
 --foreign import ccall "csound.h csoundSetMakeGraphCallback" csoundSetMakeGraphCallback'
 --foreign import ccall "csound.h csoundSetDrawGraphCallback" csoundSetDrawGraphCallback'
 --foreign import ccall "csound.h csoundSetKillGraphCallback" csoundSetKillGraphCallback'
 --foreign import ccall "csound.h csoundSetExitGraphCallback" csoundSetExitGraphCallback'
 
---csoundSetIsGraphable
---csoundSetIsGraphable
+csoundSetIsGraphable :: MonadIO m => Ptr () -> CInt -> m CInt
+csoundSetIsGraphable csnd isGraphable = liftIO (csoundSetIsGraphable' csnd isGraphable)
 
 --csoundSetMakeGraphCallback
 --csoundSetMakeGraphCallback

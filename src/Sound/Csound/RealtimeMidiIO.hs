@@ -9,7 +9,7 @@
 --
 -------------------------------------------------------------------------------
 module Sound.Csound.RealtimeMidiIO (
-    --csoundSetMIDIModule,
+    csoundSetMIDIModule,
     --csoundSetHostImplementedMIDIIO,
     --csoundGetMIDIDevList,
     --csoundSetExternalMidiInOpenCallback,
@@ -23,11 +23,10 @@ module Sound.Csound.RealtimeMidiIO (
 ) where
 
 import Control.Monad.IO.Class
-import Foreign
 import Foreign.Ptr
 import Foreign.C.Types
 
---foreign import ccall "csound.h csoundSetMIDIModule" csoundSetMIDIModule'
+foreign import ccall "csound.h csoundSetMIDIModule" csoundSetMIDIModule' :: Ptr () -> Ptr CChar -> IO ()
 --foreign import ccall "csound.h csoundSetHostImplementedMIDIIO" csoundSetHostImplementedMIDIIO'
 --foreign import ccall "csound.h csoundGetMIDIDevList" csoundGetMIDIDevList'
 --foreign import ccall "csound.h csoundSetExternalMidiInOpenCallback" csoundSetExternalMidiInOpenCallback'
@@ -39,8 +38,8 @@ import Foreign.C.Types
 --foreign import ccall "csound.h csoundSetExternalMidiErrorStringCallback" csoundSetExternalMidiErrorStringCallback'
 --foreign import ccall "csound.h csoundSetExternalMidiDeviceListCallback" csoundSetExternalMidiDeviceListCallback'
 
---csoundSetMIDIModule
---csoundSetMIDIModule
+csoundSetMIDIModule :: MonadIO m => Ptr () -> Ptr CChar -> m ()
+csoundSetMIDIModule csnd c_module = liftIO (csoundSetMIDIModule' csnd c_module)
 
 --csoundSetHostImplementedMIDIIO
 --csoundSetHostImplementedMIDIIO

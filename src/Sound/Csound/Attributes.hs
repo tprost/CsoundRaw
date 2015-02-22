@@ -28,7 +28,6 @@ module Sound.Csound.Attributes (
 
 -- | External Imports
 import Control.Monad.IO.Class
-import Foreign
 import Foreign.Ptr
 import Foreign.C.Types
 
@@ -55,7 +54,7 @@ csoundGetSr :: MonadIO m => Ptr () -> m MYFLT
 csoundGetSr csnd = liftIO (csoundGetSr' csnd)
 
 csoundGetKr :: MonadIO m => Ptr () -> m MYFLT
-csoundGetKr csnd = liftIO (csoundGetSr' csnd)
+csoundGetKr csnd = liftIO (csoundGetKr' csnd)
 
 csoundGetKsmps :: MonadIO m => Ptr () -> m CUInt
 csoundGetKsmps csnd = liftIO (csoundGetKsmps' csnd)
@@ -88,7 +87,7 @@ csoundSetParams :: MonadIO m => Ptr () -> Ptr () -> m ()
 csoundSetParams csnd p = liftIO (csoundSetParams' csnd p)
 
 csoundGetParams :: MonadIO m => Ptr () -> Ptr () -> m ()
-csoundGetParams csnd p = liftIO (csoundSetParams' csnd p)
+csoundGetParams csnd p = liftIO (csoundGetParams' csnd p)
 
 csoundGetDebug :: MonadIO m => Ptr () -> m CInt
 csoundGetDebug csnd = liftIO (csoundGetDebug' csnd)
