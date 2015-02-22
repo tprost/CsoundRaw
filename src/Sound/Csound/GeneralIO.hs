@@ -9,13 +9,13 @@
 --
 -------------------------------------------------------------------------------
 module Sound.Csound.GeneralIO (
-    --csoundGetOutputName,
+    csoundGetOutputName,
     csoundSetOutput,
-    csoundSetInput
-    --csoundSetMIDIInput,
-    --csoundSetMIDIFileInput,
-    --csoundSetMIDIOutput,
-    --csoundSetMIDIFileOutput,
+    csoundSetInput,
+    csoundSetMIDIInput,
+    csoundSetMIDIFileInput,
+    csoundSetMIDIOutput,
+    csoundSetMIDIFileOutput
     --csoundSetFileOpenCallback
 ) where
 
@@ -23,35 +23,35 @@ import Control.Monad.IO.Class
 import Foreign.Ptr
 import Foreign.C.Types
 
---foreign import ccall "csound.h csoundGetOutputName" csoundGetOutputName'
+foreign import ccall "csound.h csoundGetOutputName" csoundGetOutputName' :: Ptr () -> IO (Ptr CChar)
 foreign import ccall "csound.h csoundSetOutput" csoundSetOutput' :: Ptr () -> Ptr CChar -> Ptr CChar -> Ptr CChar -> IO ()
 foreign import ccall "csound.h csoundSetInput" csoundSetInput' :: Ptr () -> Ptr CChar -> IO ()
---foreign import ccall "csound.h csoundSetMIDIInput" csoundSetMIDIInput'
---foreign import ccall "csound.h csoundSetMIDIFileInput" csoundSetMIDIFileInput'
---foreign import ccall "csound.h csoundSetMIDIOutput" csoundSetMIDIOutput'
---foreign import ccall "csound.h csoundSetMIDIFileOutput" csoundSetMIDIFileOutput'
+foreign import ccall "csound.h csoundSetMIDIInput" csoundSetMIDIInput' :: Ptr () -> Ptr CChar -> IO ()
+foreign import ccall "csound.h csoundSetMIDIFileInput" csoundSetMIDIFileInput' :: Ptr () -> Ptr CChar -> IO ()
+foreign import ccall "csound.h csoundSetMIDIOutput" csoundSetMIDIOutput' :: Ptr () -> Ptr CChar -> IO ()
+foreign import ccall "csound.h csoundSetMIDIFileOutput" csoundSetMIDIFileOutput' :: Ptr () -> Ptr CChar -> IO ()
 --foreign import ccall "csound.h csoundSetFileOpenCallback" csoundSetFileOpenCallback'
 
---csoundGetOutputName
---csoundGetOutputName
+csoundGetOutputName :: MonadIO m => Ptr () -> m (Ptr CChar)
+csoundGetOutputName csnd = liftIO (csoundGetOutputName' csnd)
 
 csoundSetOutput :: MonadIO m => Ptr () -> Ptr CChar -> Ptr CChar -> Ptr CChar -> m ()
 csoundSetOutput cs_ptr c_name c_type c_format = liftIO (csoundSetOutput' cs_ptr c_name c_type c_format)
 
 csoundSetInput :: MonadIO m => Ptr () -> Ptr CChar -> m ()
-csoundSetInput csoundptr name = liftIO (csoundSetInput' csoundptr name)
+csoundSetInput csnd name = liftIO (csoundSetInput' csnd name)
 
---csoundSetMIDIInput
---csoundSetMIDIInput
+csoundSetMIDIInput :: MonadIO m => Ptr () -> Ptr CChar -> m ()
+csoundSetMIDIInput csnd name = liftIO (csoundSetMIDIInput' csnd name)
 
---csoundSetMIDIFileInput
---csoundSetMIDIFileInput
+csoundSetMIDIFileInput :: MonadIO m => Ptr () -> Ptr CChar -> m ()
+csoundSetMIDIFileInput csnd name = liftIO (csoundSetMIDIFileInput' csnd name)
 
---csoundSetMIDIOutput
---csoundSetMIDIOutput
+csoundSetMIDIOutput :: MonadIO m => Ptr () -> Ptr CChar -> m ()
+csoundSetMIDIOutput csnd name = liftIO (csoundSetMIDIOutput' csnd name)
 
---csoundSetMIDIFileOutput
---csoundSetMIDIFileOutput
+csoundSetMIDIFileOutput :: MonadIO m => Ptr () -> Ptr CChar -> m ()
+csoundSetMIDIFileOutput csnd name = liftIO (csoundSetMIDIFileOutput' csnd name)
 
 --csoundSetFileOpenCallback
 --csoundSetFileOpenCallback
