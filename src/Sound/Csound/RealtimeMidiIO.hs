@@ -9,7 +9,7 @@
 --
 -------------------------------------------------------------------------------
 module Sound.Csound.RealtimeMidiIO (
-    csoundSetMIDIModule,
+    csoundSetMIDIModule
     --csoundSetHostImplementedMIDIIO,
     --csoundGetMIDIDevList,
     --csoundSetExternalMidiInOpenCallback,

@@ -79,19 +79,19 @@ foreign import ccall "csound.h csoundReset" csoundReset' :: Ptr () -> IO CInt
 --csoundCompileCsd
 
 csoundPerform :: MonadIO m => Ptr () -> m CInt
-csoundPerform csoundptr = liftIO (csoundPerform' csoundptr)
+csoundPerform csnd = liftIO (csoundPerform' csnd)
 
 csoundPerformKsmps :: MonadIO m => Ptr () -> m CInt
-csoundPerformKsmps csoundptr = liftIO (csoundPerformKsmps' csoundptr)
+csoundPerformKsmps csnd = liftIO (csoundPerformKsmps' csnd)
 
 csoundPerformBuffer :: MonadIO m => Ptr () -> m CInt
-csoundPerformBuffer csoundptr = liftIO (csoundPerformBuffer' csoundptr)
+csoundPerformBuffer csnd = liftIO (csoundPerformBuffer' csnd)
 
 csoundStop :: MonadIO m => Ptr () -> m ()
-csoundStop csoundptr = liftIO (csoundStop' csoundptr)
+csoundStop csnd = liftIO (csoundStop' csnd)
 
 csoundCleanup :: MonadIO m => Ptr () -> m CInt
-csoundCleanup csoundptr = liftIO (csoundCleanup' csoundptr)
+csoundCleanup csnd = liftIO (csoundCleanup' csnd)
 
 csoundReset :: MonadIO m => Ptr () -> m CInt
-csoundReset csoundptr = liftIO (csoundReset' csoundptr)
+csoundReset csnd = liftIO (csoundReset' csnd)

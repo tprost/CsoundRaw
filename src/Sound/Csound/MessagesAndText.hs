@@ -59,25 +59,25 @@ foreign import ccall "csound.h csoundDestroyMessageBuffer" csoundDestroyMessageB
 --csoundSetMessageCallback
 
 csoundGetMessageLevel :: MonadIO m => Ptr () -> m CInt
-csoundGetMessageLevel csoundptr = liftIO (csoundGetMessageLevel' csoundptr)
+csoundGetMessageLevel csnd = liftIO (csoundGetMessageLevel' csnd)
 
 csoundSetMessageLevel :: MonadIO m => Ptr () -> CInt -> m ()
-csoundSetMessageLevel csoundptr messagelvl = liftIO (csoundSetMessageLevel' csoundptr messagelvl)
+csoundSetMessageLevel csnd messagelvl = liftIO (csoundSetMessageLevel' csnd messagelvl)
 
 csoundCreateMessageBuffer :: MonadIO m => Ptr () -> CInt -> m ()
-csoundCreateMessageBuffer csoundptr tostdout = liftIO (csoundCreateMessageBuffer' csoundptr tostdout)
+csoundCreateMessageBuffer csnd tostdout = liftIO (csoundCreateMessageBuffer' csnd tostdout)
 
 --csoundGetFirstMessage
 --csoundGetFirstMessage
 
 csoundGetFirstMessageAttr :: MonadIO m => Ptr () -> m CInt
-csoundGetFirstMessageAttr csoundptr = liftIO (csoundGetFirstMessageAttr' csoundptr)
+csoundGetFirstMessageAttr csnd = liftIO (csoundGetFirstMessageAttr' csnd)
 
 csoundPopFirstMessage :: MonadIO m => Ptr () -> m ()
-csoundPopFirstMessage csoundptr = liftIO (csoundPopFirstMessage' csoundptr)
+csoundPopFirstMessage csnd = liftIO (csoundPopFirstMessage' csnd)
 
 csoundGetMessageCnt :: MonadIO m => Ptr () -> m CInt
-csoundGetMessageCnt csoundptr = liftIO (csoundGetMessageCnt' csoundptr)
+csoundGetMessageCnt csnd = liftIO (csoundGetMessageCnt' csnd)
 
 csoundDestroyMessageBuffer :: MonadIO m => Ptr () -> m ()
-csoundDestroyMessageBuffer csoundptr = liftIO (csoundDestroyMessageBuffer' csoundptr)
+csoundDestroyMessageBuffer csnd = liftIO (csoundDestroyMessageBuffer' csnd)

@@ -33,7 +33,7 @@ csoundCreate :: MonadIO m => Ptr () -> m (Ptr ())
 csoundCreate hostdata = liftIO (csoundCreate' hostdata)
 
 csoundDestroy :: MonadIO m => Ptr () -> m ()
-csoundDestroy csoundptr = liftIO (csoundDestroy' csoundptr)
+csoundDestroy csnd = liftIO (csoundDestroy' csnd)
 
 csoundGetAPIVersion :: MonadIO m => m CInt
 csoundGetAPIVersion = liftIO csoundGetAPIVersion'

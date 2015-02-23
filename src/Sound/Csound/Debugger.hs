@@ -36,10 +36,10 @@ foreign import ccall "csdebug.h csoundDebugStop" csoundDebugStop' :: Ptr () -> I
 --foreign import ccall "csdebug.h csoundDebugGetInstrument" csoundDebugGetInstrument'
 
 csoundDebuggerInit :: MonadIO m => Ptr () -> m ()
-csoundDebuggerInit csoundptr = liftIO (csoundDebuggerInit' csoundptr)
+csoundDebuggerInit csnd = liftIO (csoundDebuggerInit' csnd)
 
 csoundDebuggerClean :: MonadIO m => Ptr () -> m ()
-csoundDebuggerClean csoundptr = liftIO (csoundDebuggerClean' csoundptr)
+csoundDebuggerClean csnd = liftIO (csoundDebuggerClean' csnd)
 
 --csoundSetInstrumentBreakpoint 
 --csoundSetInstrumentBreakpoint 
@@ -48,16 +48,16 @@ csoundDebuggerClean csoundptr = liftIO (csoundDebuggerClean' csoundptr)
 --csoundRemoveInstrumentBreakpoint
 
 csoundClearBreakpoints :: MonadIO m => Ptr () -> m ()
-csoundClearBreakpoints csoundptr = liftIO (csoundClearBreakpoints' csoundptr)
+csoundClearBreakpoints csnd = liftIO (csoundClearBreakpoints' csnd)
 
 --csoundSetBreakpointCallback
 --csoundSetBreakpointCallback
 
 csoundDebuggerContinue :: MonadIO m => Ptr () -> m ()
-csoundDebuggerContinue csoundptr = liftIO (csoundDebuggerContinue' csoundptr)
+csoundDebuggerContinue csnd = liftIO (csoundDebuggerContinue' csnd)
 
 csoundDebugStop :: MonadIO m => Ptr () -> m ()
-csoundDebugStop csoundptr = liftIO (csoundDebugStop' csoundptr)
+csoundDebugStop csnd = liftIO (csoundDebugStop' csnd)
 
 --csoundDebugGetInstrument
 --csoundDebugGetInstrument

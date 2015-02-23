@@ -40,13 +40,13 @@ foreign import ccall "csound.h csoundRewindScore" csoundRewindScore' :: Ptr () -
 --csoundReadScore
 
 csoundGetScoreTime :: MonadIO m => Ptr () -> m CDouble
-csoundGetScoreTime csoundptr = liftIO (csoundGetScoreTime' csoundptr)
+csoundGetScoreTime csnd = liftIO (csoundGetScoreTime' csnd)
 
 csoundIsScorePending :: MonadIO m => Ptr () -> m CInt
-csoundIsScorePending csoundptr = liftIO (csoundIsScorePending' csoundptr)
+csoundIsScorePending csnd = liftIO (csoundIsScorePending' csnd)
 
 csoundSetScorePending :: MonadIO m => Ptr () -> CInt -> m ()
-csoundSetScorePending csoundptr pending = liftIO (csoundSetScorePending' csoundptr pending)
+csoundSetScorePending csnd pending = liftIO (csoundSetScorePending' csnd pending)
 
 --csoundGetScoreOffsetSeconds
 --csoundGetScoreOffsetSeconds
@@ -55,7 +55,7 @@ csoundSetScorePending csoundptr pending = liftIO (csoundSetScorePending' csoundp
 --csoundSetScoreOffsetSeconds
 
 csoundRewindScore :: MonadIO m => Ptr () -> m ()
-csoundRewindScore csoundptr = liftIO (csoundRewindScore' csoundptr)
+csoundRewindScore csnd = liftIO (csoundRewindScore' csnd)
 
 --csoundSetCscoreCallback
 --csoundSetCscoreCallback

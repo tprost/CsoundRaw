@@ -29,7 +29,7 @@ foreign import ccall "csound.h csoundTableLength" csoundTableLength' :: Ptr () -
 --foreign import ccall "csound.h csoundGetTable" csoundGetTable'
 
 csoundTableLength :: MonadIO m => Ptr () -> CInt -> m CInt
-csoundTableLength csoundptr table = liftIO (csoundTableLength' csoundptr table)
+csoundTableLength csnd table = liftIO (csoundTableLength' csnd table)
 
 --csoundTableGet
 --csoundTableGet
