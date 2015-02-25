@@ -8,9 +8,14 @@
 --
 -------------------------------------------------------------------------------
 module Sound.Csound.Types (
-    MYFLT
+    MYFLT,
+    CsoundFileOpenCallback
 ) where
 
+import Foreign.Ptr
+import Foreign.C.String
 import Foreign.C.Types
 
 type MYFLT = CDouble
+
+type CsoundFileOpenCallback = FunPtr (Ptr () -> CString -> CInt -> CInt -> CInt -> IO ())
