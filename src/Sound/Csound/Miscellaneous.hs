@@ -11,31 +11,31 @@
 module Sound.Csound.Miscellaneous (
     --csoundRunCommand,
     csoundInitTimerStruct,
-    csoundGetRealTime
+    csoundGetRealTime,
     --csoundGetCPUTime,
     --csoundGetRandomSeedFromTime,
     --csoundSetLanguage,
     --csoundGetEnv,
     --csoundSetGlobalEnv,
     --csoundCreateGlobalVariable,
-    --csoundQueryGlobalVariable,
-    --csoundQueryGlobalVariableNoCheck,
-    --csoundDestroyGlobalVariable,
+    csoundQueryGlobalVariable,
+    csoundQueryGlobalVariableNoCheck,
+    csoundDestroyGlobalVariable,
     --csoundRunUtility,
     --csoundListUtilities,
     --csoundDeleteUtilityList,
-    --csoundGetUtilityDescription,
-    --csoundRand31,
+    csoundGetUtilityDescription,
+    csoundRand31,
     --csoundSeedRandMT,
     --csoundRandMT,
-    --csoundCreateCircularBuffer,
-    --csoundReadCircularBuffer,
-    --csoundPeekCircularBuffer,
-    --csoundWriteCircularBuffer,
-    --csoundFlushCircularBuffer,
-    --csoundDestroyCircularBuffer,
+    csoundCreateCircularBuffer,
+    csoundReadCircularBuffer,
+    csoundPeekCircularBuffer,
+    csoundWriteCircularBuffer,
+    csoundFlushCircularBuffer,
+    csoundDestroyCircularBuffer,
     --csoundOpenLibrary,
-    --csoundCloseLibrary,
+    csoundCloseLibrary
     --csoundGetLibrarySymbol
 ) where
 
@@ -52,24 +52,24 @@ foreign import ccall "csound.h csoundGetRealTime" csoundGetRealTime' :: Ptr () -
 --foreign import ccall "csound.h csoundGetEnv" csoundGetEnv'
 --foreign import ccall "csound.h csoundSetGlobalEnv" csoundSetGlobalEnv'
 --foreign import ccall "csound.h csoundCreateGlobalVariable" csoundCreateGlobalVariable'
---foreign import ccall "csound.h csoundQueryGlobalVariable" csoundQueryGlobalVariable'
---foreign import ccall "csound.h csoundQueryGlobalVariableNoCheck" csoundQueryVariableNoCheck'
---foreign import ccall "csound.h csoundDestroyGlobalVariable" csoundDestroyGlobalVariable'
+foreign import ccall "csound.h csoundQueryGlobalVariable" csoundQueryGlobalVariable' :: Ptr () -> Ptr CChar -> IO (Ptr ())
+foreign import ccall "csound.h csoundQueryGlobalVariableNoCheck" csoundQueryGlobalVariableNoCheck' :: Ptr () -> Ptr CChar -> IO (Ptr ())
+foreign import ccall "csound.h csoundDestroyGlobalVariable" csoundDestroyGlobalVariable' :: Ptr () -> Ptr CChar -> IO CInt
 --foreign import ccall "csound.h csoundRunUtility" csoundRunUtility'
 --foreign import ccall "csound.h csoundListUtilities" csoundListUtilities'
 --foreign import ccall "csound.h csoundDeleteUtilityList" csoundDeleteUtilityList'
---foreign import ccall "csound.h csoundGetUtilityDescription" csoundGetUtilityDescription'
---foreign import ccall "csound.h csoundRand31" csoundRand31'
+foreign import ccall "csound.h csoundGetUtilityDescription" csoundGetUtilityDescription' :: Ptr () -> Ptr CChar -> IO (Ptr CChar)
+foreign import ccall "csound.h csoundRand31" csoundRand31' :: Ptr CInt -> IO CInt
 --foreign import ccall "csound.h csoundSeedRandMT" csoundSeedRandMT'
 --foreign import ccall "csound.h csoundRandMT" csoundRandMT'
---foreign import ccall "csound.h csoundCreateCircularBuffer" csoundCreateCircularBuffer'
---foreign import ccall "csound.h csoundReadCircularBuffer" csoundReadCircularBuffer'
---foreign import ccall "csound.h csoundPeekCircularBuffer" csoundPeekCircularBuffer'
---foreign import ccall "csound.h csoundWriteCircularBuffer" csoundWriteCircularBuffer'
---foreign import ccall "csound.h csoundFlushCircularBuffer" csoundFlushCircularBuffer'
---foreign import ccall "csound.h csoundDestroyCircularBuffer" csoundDestroyCircularBuffer'
+foreign import ccall "csound.h csoundCreateCircularBuffer" csoundCreateCircularBuffer' :: Ptr () -> CInt -> CInt -> IO (Ptr ())
+foreign import ccall "csound.h csoundReadCircularBuffer" csoundReadCircularBuffer' :: Ptr () -> Ptr () -> Ptr () -> CInt -> IO CInt
+foreign import ccall "csound.h csoundPeekCircularBuffer" csoundPeekCircularBuffer' :: Ptr () -> Ptr () -> Ptr () -> CInt -> IO CInt
+foreign import ccall "csound.h csoundWriteCircularBuffer" csoundWriteCircularBuffer' :: Ptr () -> Ptr () -> Ptr () -> CInt -> IO CInt
+foreign import ccall "csound.h csoundFlushCircularBuffer" csoundFlushCircularBuffer' :: Ptr () -> Ptr () -> IO ()
+foreign import ccall "csound.h csoundDestroyCircularBuffer" csoundDestroyCircularBuffer' :: Ptr () -> Ptr () -> IO ()
 --foreign import ccall "csound.h csoundOpenLibrary" csoundOpenLibrary'
---foreign import ccall "csound.h csoundCloseLibrary" csoundCloseLibrary'
+foreign import ccall "csound.h csoundCloseLibrary" csoundCloseLibrary' :: Ptr () -> IO CInt
 --foreign import ccall "csound.h csoundGetLibrarySymbol" csoundGetLibrarySymbol'
 
 --csoundRunCommand
@@ -99,14 +99,14 @@ csoundGetRealTime rtclock = liftIO (csoundGetRealTime' rtclock)
 --csoundCreateGlobalVariable
 --csoundCreateGlobalVariable
 
---csoundQueryGlobalVariable
---csoundQueryGlobalVariable
+csoundQueryGlobalVariable :: MonadIO m => Ptr () -> Ptr CChar -> m (Ptr ())
+csoundQueryGlobalVariable csnd name = liftIO (csoundQueryGlobalVariable' csnd name)
 
---csoundQueryGlobalVariableNoCheck
---csoundQueryGlobalVariableNoCheck
+csoundQueryGlobalVariableNoCheck :: MonadIO m => Ptr () -> Ptr CChar -> m (Ptr ())
+csoundQueryGlobalVariableNoCheck csnd name = liftIO (csoundQueryGlobalVariableNoCheck' csnd name)
 
---csoundDestroyGlobalVariable
---csoundDestroyGlobalVariable
+csoundDestroyGlobalVariable :: MonadIO m => Ptr () -> Ptr CChar -> m CInt
+csoundDestroyGlobalVariable csnd name = liftIO (csoundDestroyGlobalVariable' csnd name)
 
 --csoundRunUtility
 --csoundRunUtility
@@ -117,11 +117,11 @@ csoundGetRealTime rtclock = liftIO (csoundGetRealTime' rtclock)
 --csoundDeleteUtilityList
 --csoundDeleteUtilityList
 
---csoundGetUtilityDescription
---csoundGetUtilityDescription
+csoundGetUtilityDescription :: MonadIO m => Ptr () -> Ptr CChar -> m (Ptr CChar)
+csoundGetUtilityDescription csnd utilname = liftIO (csoundGetUtilityDescription' csnd utilname)
 
---csoundRand31
---csoundRand31
+csoundRand31 :: MonadIO m => Ptr CInt -> m CInt
+csoundRand31 seedval = liftIO (csoundRand31' seedval)
 
 --csoundSeedRandMT
 --csoundSeedRandMT
@@ -129,29 +129,29 @@ csoundGetRealTime rtclock = liftIO (csoundGetRealTime' rtclock)
 --csoundRandMT
 --csoundRandMT
 
---csoundCreateCircularBuffer
---csoundCreateCircularBuffer
+csoundCreateCircularBuffer :: MonadIO m => Ptr () -> CInt -> CInt -> m (Ptr ())
+csoundCreateCircularBuffer csnd numelem elemsize = liftIO (csoundCreateCircularBuffer' csnd numelem elemsize)
 
---csoundReadCircularBuffer
---csoundReadCircularBuffer
+csoundReadCircularBuffer :: MonadIO m => Ptr () -> Ptr () -> Ptr () -> CInt -> m CInt
+csoundReadCircularBuffer csnd circular_buffer out items = liftIO (csoundReadCircularBuffer' csnd circular_buffer out items)
 
---csoundPeekCircularBuffer
---csoundPeekCircularBuffer
+csoundPeekCircularBuffer :: MonadIO m => Ptr () -> Ptr () -> Ptr () -> CInt -> m CInt
+csoundPeekCircularBuffer csnd circular_buffer out items = liftIO (csoundPeekCircularBuffer' csnd circular_buffer out items)
+ 
+csoundWriteCircularBuffer :: MonadIO m => Ptr () -> Ptr () -> Ptr () -> CInt -> m CInt
+csoundWriteCircularBuffer csnd p inp items = liftIO (csoundWriteCircularBuffer' csnd p inp items)
 
---csoundWriteCircularBuffer
---csoundWriteCircularBuffer
+csoundFlushCircularBuffer :: MonadIO m => Ptr () -> Ptr () -> m ()
+csoundFlushCircularBuffer csnd p = liftIO (csoundFlushCircularBuffer' csnd p)
 
---csoundFlushCircularBuffer
---csoundFlushCircularBuffer
-
---csoundDestroyCircularBuffer
---csoundDestroyCircularBuffer
+csoundDestroyCircularBuffer :: MonadIO m => Ptr () -> Ptr () -> m ()
+csoundDestroyCircularBuffer csnd circularbuffer = liftIO (csoundDestroyCircularBuffer' csnd circularbuffer)
 
 --csoundOpenLibrary
 --csoundOpenLibrary
 
---csoundCloseLibrary
---csoundCloseLibrary
+csoundCloseLibrary :: MonadIO m => Ptr () -> m CInt
+csoundCloseLibrary library = liftIO (csoundCloseLibrary' library)
 
 --csoundGetLibrarySymbol
 --csoundGetLibrarySymbol

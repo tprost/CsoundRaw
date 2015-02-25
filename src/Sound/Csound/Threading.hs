@@ -13,24 +13,25 @@ module Sound.Csound.Threading (
     --csoundCreateThread,
     csoundGetCurrentThreadId,
     --csoundJoinThread,
-    csoundCreateThreadLock
+    csoundCreateThreadLock,
     --csoundWaitThreadLock,
-    --csoundWaitThreadLockNoTimeout,
-    --csoundNotifyThreadLock,
-    --csoundDestroyThreadLock,
-    --csoundCreateMutex,
-    --csoundLockMutex,
-    --csoundLockMutexNoWait,
-    --csoundUnlockMutex,
-    --csoundDestroyMutex,
-    --csoundCreateBarrier,
-    --csoundDestroyBarrier,
-    --csoundWaitBarrier,
+    csoundWaitThreadLockNoTimeout,
+    csoundNotifyThreadLock,
+    csoundDestroyThreadLock,
+    csoundCreateMutex,
+    csoundLockMutex,
+    csoundLockMutexNoWait,
+    csoundUnlockMutex,
+    csoundDestroyMutex,
+    csoundCreateBarrier,
+    csoundDestroyBarrier,
+    csoundWaitBarrier
     --csoundSleep
 ) where
 
 import Control.Monad.IO.Class
 import Foreign.Ptr
+import Foreign.C.Types
 
 --foreign import ccall "csound.h csoundSetYieldCallback" csoundSetYieldCallback'
 --foreign import ccall "csound.h csoundCreateThread" csoundCreateThread'
@@ -38,15 +39,17 @@ foreign import ccall "csound.h csoundGetCurrentThreadId" csoundGetCurrentThreadI
 --foreign import ccall "csound.h csoundJoinThread" csoundJoinThread'
 foreign import ccall "csound.h csoundCreateThreadLock" csoundCreateThreadLock' :: IO (Ptr ())
 --foreign import ccall "csound.h csoundWaitThreadLock" csoundWaitThreadLock'
---foreign import ccall "csound.h csoundWaitThreadLockNoTimeout" csoundWaitThreadLockNoTimeout'
---foreign import ccall "csound.h csoundNotifyThreadLock" csoundNotifyThreadLock'
---foreign import ccall "csound.h csoundDestroyThreadLock" csoundDestroyThreadLock'
---foreign import ccall "csound.h csoundCreateMutex" csoundCreateMutex'
---foreign import ccall "csound.h csoundLockMutex" csoundLockMutex'
---foreign import ccall "csound.h csoundLockMutexNoWait" csoundLockMutexNoWait'
---foreign import ccall "csound.h csoundUnlockMutex" csoundUnlockMutex'
---foreign import ccall "csound.h csoundDestroyMutex" csoundDestroyMutex'
---foreign import ccall "csound.h csoundWaitBarrier" csoundWaitBarrier'
+foreign import ccall "csound.h csoundWaitThreadLockNoTimeout" csoundWaitThreadLockNoTimeout' :: Ptr () -> IO ()
+foreign import ccall "csound.h csoundNotifyThreadLock" csoundNotifyThreadLock' :: Ptr () -> IO ()
+foreign import ccall "csound.h csoundDestroyThreadLock" csoundDestroyThreadLock' :: Ptr () -> IO ()
+foreign import ccall "csound.h csoundCreateMutex" csoundCreateMutex' :: CInt -> IO (Ptr ())
+foreign import ccall "csound.h csoundLockMutex" csoundLockMutex' :: Ptr () -> IO ()
+foreign import ccall "csound.h csoundLockMutexNoWait" csoundLockMutexNoWait' :: Ptr () -> IO CInt
+foreign import ccall "csound.h csoundUnlockMutex" csoundUnlockMutex' :: Ptr () -> IO ()
+foreign import ccall "csound.h csoundDestroyMutex" csoundDestroyMutex' :: Ptr () -> IO ()
+foreign import ccall "csound.h csoundCreateBarrier" csoundCreateBarrier' :: CUInt -> IO (Ptr ())
+foreign import ccall "csound.h csoundDestroyBarrier" csoundDestroyBarrier' :: Ptr () -> IO CInt
+foreign import ccall "csound.h csoundWaitBarrier" csoundWaitBarrier' :: Ptr () -> IO CInt
 --foreign import ccall "csound.h csoundSleep" csoundSleep'
 
 --csoundSetYieldCallback
@@ -67,38 +70,38 @@ csoundCreateThreadLock = liftIO csoundCreateThreadLock'
 --csoundWaitThreadLock
 --csoundWaitThreadLock
 
---csoundWaitThreadLockNoTimeout
---csoundWaitThreadLockNoTimeout
+csoundWaitThreadLockNoTimeout :: MonadIO m => Ptr () -> m ()
+csoundWaitThreadLockNoTimeout lock = liftIO (csoundWaitThreadLockNoTimeout' lock)
 
---csoundNotifyThreadLock
---csoundNotifyThreadLock
+csoundNotifyThreadLock :: MonadIO m => Ptr () -> m ()
+csoundNotifyThreadLock lock = liftIO (csoundNotifyThreadLock' lock)
 
---csoundDestroyThreadLock
---csoundDestroyThreadLock
+csoundDestroyThreadLock :: MonadIO m => Ptr () -> m ()
+csoundDestroyThreadLock lock = liftIO (csoundDestroyThreadLock' lock)
 
---csoundCreateMutex
---csoundCreateMutex
+csoundCreateMutex :: MonadIO m => CInt -> m (Ptr ())
+csoundCreateMutex isrecusive = liftIO (csoundCreateMutex' isrecusive)
 
---csoundLockMutex
---csoundLockMutex
+csoundLockMutex :: MonadIO m => Ptr () -> m ()
+csoundLockMutex mutex = liftIO (csoundLockMutex' mutex)
 
---csoundLockMutexNoWait
---csoundLockMutexNoWait
+csoundLockMutexNoWait :: MonadIO m => Ptr () -> m CInt
+csoundLockMutexNoWait mutex = liftIO (csoundLockMutexNoWait' mutex)
+ 
+csoundUnlockMutex :: MonadIO m => Ptr () -> m ()
+csoundUnlockMutex mutex = liftIO (csoundUnlockMutex' mutex)
 
---csoundUnlockMutex
---csoundUnlockMutex
+csoundDestroyMutex :: MonadIO m => Ptr () -> m ()
+csoundDestroyMutex mutex = liftIO (csoundDestroyMutex' mutex)
 
---csoundDestroyMutex
---csoundDestroyMutex
+csoundCreateBarrier :: MonadIO m => CUInt -> m (Ptr ())
+csoundCreateBarrier max = liftIO (csoundCreateBarrier' max)
 
---csoundCreateBarrier
---csoundCreateBarrier
-
---csoundDestroyBarrier
---csoundDestroyBarrier
+csoundDestroyBarrier :: MonadIO m => Ptr () -> m CInt
+csoundDestroyBarrier barrier = liftIO (csoundDestroyBarrier' barrier)
    
---csoundWaitBarrier
---csoundWaitBarrier
+csoundWaitBarrier :: MonadIO m => Ptr () -> m CInt
+csoundWaitBarrier barrier = liftIO (csoundWaitBarrier' barrier)
 
 --csoundSleep
 --csoundSleep
