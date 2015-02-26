@@ -1,4 +1,4 @@
-# csound
+# CsoundRaw
 
 This package provides low level bindings to the Csound 6 API for Haskell.
 
