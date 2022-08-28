@@ -16,9 +16,9 @@ module Sound.Csound.Performance (
     --csoundEvalCode,
     --csoundInitializeCscore,
     --csoundCompileArgs,
-    --csoundStart,
+    csoundStart,
     --csoundCompile,
-    -- csoundCompileCsdText,
+    -- csoundCompileCsd,
     csoundCompileCsdText,
     csoundPerform,
     csoundPerformKsmps,
@@ -39,7 +39,7 @@ import Foreign.C.Types
 --foreign import ccall "csound.h csoundEvalCode" csoundEvalCode'
 --foreign import ccall "csound.h csoundInitializeCscore" csoundInitializeCscore'
 --foreign import ccall "csound.h csoundCompileArgs" csoundCompileArgs'
---foreign import ccall "csound.h csoundStart" csoundStart'
+foreign import ccall "csound.h csoundStart" csoundStart' :: Ptr () -> IO CInt
 --foreign import ccall "csound.h csoundCompile" csoundCompile'
 --foreign import ccall "csound.h csoundCompileCsd" csoundCompileCsd'
 foreign import ccall "csound.h csoundCompileCsdText" csoundCompileCsdText' :: Ptr () -> Ptr CChar -> IO CInt
@@ -71,8 +71,8 @@ foreign import ccall "csound.h csoundReset" csoundReset' :: Ptr () -> IO CInt
 --csoundCompileArgs
 --csoundCompileArgs
 
---csoundStart
---csoundStart
+csoundStart :: MonadIO m => Ptr () -> m CInt
+csoundStart csnd = liftIO (csoundStart' csnd)
 
 --csoundCompile
 --csoundCompile
