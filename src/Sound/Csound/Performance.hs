@@ -18,7 +18,8 @@ module Sound.Csound.Performance (
     --csoundCompileArgs,
     --csoundStart,
     --csoundCompile,
-    --csoundCompileCsd,
+    -- csoundCompileCsdText,
+    csoundCompileCsdText,
     csoundPerform,
     csoundPerformKsmps,
     csoundPerformBuffer,
@@ -41,6 +42,7 @@ import Foreign.C.Types
 --foreign import ccall "csound.h csoundStart" csoundStart'
 --foreign import ccall "csound.h csoundCompile" csoundCompile'
 --foreign import ccall "csound.h csoundCompileCsd" csoundCompileCsd'
+foreign import ccall "csound.h csoundCompileCsdText" csoundCompileCsdText' :: Ptr () -> Ptr CChar -> IO CInt
 foreign import ccall "csound.h csoundPerform" csoundPerform' :: Ptr () -> IO CInt
 foreign import ccall "csound.h csoundPerformKsmps" csoundPerformKsmps' :: Ptr () -> IO CInt
 foreign import ccall "csound.h csoundPerformBuffer" csoundPerformBuffer' :: Ptr () -> IO CInt
@@ -77,6 +79,9 @@ foreign import ccall "csound.h csoundReset" csoundReset' :: Ptr () -> IO CInt
 
 --csoundCompileCsd
 --csoundCompileCsd
+
+csoundCompileCsdText :: MonadIO m => Ptr () -> Ptr CChar -> m CInt
+csoundCompileCsdText csnd str = liftIO (csoundCompileCsdText' csnd str)
 
 csoundPerform :: MonadIO m => Ptr () -> m CInt
 csoundPerform csnd = liftIO (csoundPerform' csnd)
