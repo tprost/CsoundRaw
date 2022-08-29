@@ -26,7 +26,7 @@ module Sound.Csound.ChannelsControlEvents (
     --csoundSetOutputChannelCallback,
     --csoundSetPvsChannel,
     --csoundGetPvsChannel,
-    --csoundScoreEvent,
+    csoundScoreEvent,
     --csoundScoreEventAbsolute,
     --csoundInputMessage,
     --csoundKillInstance,
@@ -39,6 +39,8 @@ module Sound.Csound.ChannelsControlEvents (
 import Control.Monad.IO.Class
 import Foreign.Ptr
 import Foreign.C.Types
+
+import Sound.Csound.Types
 
 --foreign import ccall "csound.h csoundGetChannelPtr" csoundGetChannelPtr'
 --foreign import ccall "csound.h csoundListChannels" csoundListChannels'
@@ -57,7 +59,7 @@ import Foreign.C.Types
 --foreign import ccall "csound.h csoundSetOutputChannelCallback" csoundSetOutputChannelCallback'
 --foreign import ccall "csound.h csoundSetPvsChannel" csoundSetPvsChannel'
 --foreign import ccall "csound.h csoundGetPvsChannel" csoundGetPvsChannel'
---foreign import ccall "csound.h csoundScoreEvent" csoundScoreEvent'
+foreign import ccall "csound.h csoundScoreEvent" csoundScoreEvent' :: Ptr () -> CChar -> Ptr MYFLT -> CLong -> IO CInt
 --foreign import ccall "csound.h csoundScoreEventAbsolute" csoundScoreEventAbsolute'
 --foreign import ccall "csound.h csoundInputMessage" csoundInputMessage'
 --foreign import ccall "csound.h csoundKillInstance" csoundKillInstance'
@@ -117,8 +119,9 @@ foreign import ccall "csound.h csoundKeyPress" csoundKeyPress' :: Ptr () -> CCha
 --csoundGetPvsChannel
 --csoundGetPvsChannel
 
---csoundScoreEvent
---csoundScoreEvent
+csoundScoreEvent :: MonadIO m => Ptr () -> CChar -> Ptr MYFLT -> CLong -> m CInt
+csoundScoreEvent csnd scoreEventType pFields numFields = 
+  liftIO (csoundScoreEvent' csnd scoreEventType pFields numFields)
   
 --csoundScoreEventAbsolute
 --csoundScoreEventAbsolute
