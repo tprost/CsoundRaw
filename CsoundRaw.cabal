@@ -21,7 +21,7 @@ Source-repository head
 
 library
   hs-source-dirs:       src
-  extra-libraries:      csound
+  extra-libraries:      libcsnd6
   ghc-options:          -Wall -O2
   other-modules:
   other-extensions:
