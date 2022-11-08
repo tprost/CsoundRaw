@@ -20,8 +20,10 @@ Source-repository head
 
 
 library
-  hs-source-dirs:       src
-  extra-libraries:      csound64
+  hs-source-dirs:       src  
+  frameworks:
+    CsoundLib64
+  extra-framework-dirs: /Library/Frameworks/
   ghc-options:          -Wall -O2
   other-modules:
   other-extensions:

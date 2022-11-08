@@ -16,6 +16,16 @@ flags: {}
 # Extra package databases containing global packages
 extra-package-dbs: []
 
+extra-include-dirs:
+  - /home/taylor/include
+  - /Users/tprost/dev/personal/csound/include
+  - /usr/local/lib/
+
+extra-lib-dirs:
+  - /home/taylor/lib
+  - /Users/tprost/dev/personal/csound/build
+  - /usr/local/lib/
+
 # Control whether we use the GHC we find on the path
 # system-ghc: true
 
